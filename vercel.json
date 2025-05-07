@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://web-production-464bf.up.railway.app/"
+      "destination": "https://web-production-464bf.up.railway.app/$1"
     }
   ]
 }
