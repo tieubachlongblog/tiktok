@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tải Video TikTok Không Watermark</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f7f7; text-align: center; padding: 40px; }
+    input, button { padding: 12px; margin: 10px; width: 80%; max-width: 400px; }
+    video { margin-top: 20px; width: 100%; max-width: 500px; }
+    a { display: block; margin-top: 10px; color: #ff0050; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Tải Video TikTok Không Watermark</h1>
+  <input type="text" id="url" placeholder="Dán link TikTok tại đây">
+  <button onclick="fetchVideo()">Tải video</button>
+  <div id="result" style="display:none;">
+    <video id="video" controls></video>
+    <a id="download" href="#" download>⬇️ Tải xuống</a>
+  </div>
+  <script>
+    async function fetchVideo() {
+      const url = document.getElementById('url').value;
+      const response = await fetch('/api/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        document.getElementById('video').src = data.video_url;
+        document.getElementById('download').href = data.video_url;
+        document.getElementById('result').style.display = 'block';
+      } else {
+        alert("❌ Không thể tải video. Hãy kiểm tra lại!");
+      }
+    }
+  </script>
+</body>
+</html>
